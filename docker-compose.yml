@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  app:
+    build: .
+    restart: always
+    ports: 
+      - 80:5000
+    environment: 
+      - DATABASE_HOST=database
+      - DATABASE_PORT=3306
+      - DATABASE_NAME=milkyway
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=test
+      - DATABASE_SYNC=true
+      - DATABASE_LOGGING=true
+  database:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment: 
+      - MYSQL_DATABASE=milkyway
+      - MYSQL_ROOT_PASSWORD=test
+    volumes:
+      - ~/database/milkyway:/var/lib/mysql
