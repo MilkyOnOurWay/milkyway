@@ -1,4 +1,4 @@
-import { User } from "src/user/domain/user";
+import { User } from 'src/user/domain/user';
 
 export interface UserRepository {
   save(user: User): Promise<void>;

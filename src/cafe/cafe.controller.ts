@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CafeService } from './cafe.service';
 import { CreateCafeDto } from './dto/create-cafe.dto';
 import { UpdateCafeDto } from './dto/update-cafe.dto';
@@ -8,8 +16,8 @@ export class CafeController {
   constructor(private readonly cafeService: CafeService) {}
 
   @Post()
-  create(@Body() createCafeDto: CreateCafeDto) {
-    return this.cafeService.create(createCafeDto);
+  create(@Body() eto: CreateCafeDto) {
+    return this.cafeService.create(eto);
   }
 
   @Get()
@@ -23,8 +31,8 @@ export class CafeController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateCafeDto: UpdateCafeDto) {
-    return this.cafeService.update(+id, updateCafeDto);
+  update(@Param('id') id: string, @Body() dto: UpdateCafeDto) {
+    return this.cafeService.update(+id, dto);
   }
 
   @Delete(':id')

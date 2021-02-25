@@ -8,7 +8,11 @@ export default class AppService implements OnModuleInit, OnModuleDestroy {
 
   public async onModuleInit(): Promise<void> {
     const entities = [User];
-    this.connection = await createConnection({ type: 'mysql', ...this.loadDBConfig(), entities });
+    this.connection = await createConnection({
+      type: 'mysql',
+      ...this.loadDBConfig(),
+      entities,
+    });
     if (!this.connection) process.exit(1);
   }
 
@@ -19,37 +23,37 @@ export default class AppService implements OnModuleInit, OnModuleDestroy {
   private loadDBConfig() {
     if (!process.env.DATABASE_HOST) {
       console.error('DATABASE_HOST is not exists');
-      process.exit(1)
+      process.exit(1);
     }
 
     if (!process.env.DATABASE_PORT) {
       console.error('DATABASE_PORT is not exists');
-      process.exit(1)
+      process.exit(1);
     }
 
     if (!process.env.DATABASE_NAME) {
       console.error('DATABASE_NAME is not exists');
-      process.exit(1)
+      process.exit(1);
     }
 
     if (!process.env.DATABASE_USER) {
       console.error('DATABASE_USER is not exists');
-      process.exit(1)
+      process.exit(1);
     }
 
     if (!process.env.DATABASE_PASSWORD) {
       console.error('DATABASE_PASSWORD is not exists');
-      process.exit(1)
+      process.exit(1);
     }
 
     if (!process.env.DATABASE_SYNC) {
       console.error('DATABASE_SYNC is not exists');
-      process.exit(1)
+      process.exit(1);
     }
 
     if (!process.env.DATABASE_LOGGING) {
       console.error('DATABASE_LOGGING is not exists');
-      process.exit(1)
+      process.exit(1);
     }
 
     return {
@@ -60,6 +64,6 @@ export default class AppService implements OnModuleInit, OnModuleDestroy {
       password: process.env.DATABASE_PASSWORD,
       synchronize: 'true' === process.env.DATABASE_SYNC,
       logging: 'true' === process.env.DATABASE_LOGGING,
-    }
+    };
   }
 }

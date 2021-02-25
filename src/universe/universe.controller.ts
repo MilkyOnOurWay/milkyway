@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UniverseService } from './universe.service';
 import { CreateUniverseDto } from './dto/create-universe.dto';
 import { UpdateUniverseDto } from './dto/update-universe.dto';
@@ -23,8 +31,8 @@ export class UniverseController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUniverseDto: UpdateUniverseDto) {
-    return this.universeService.update(+id, updateUniverseDto);
+  update(@Param('id') id: string, @Body() dto: UpdateUniverseDto) {
+    return this.universeService.update(+id, dto);
   }
 
   @Delete(':id')

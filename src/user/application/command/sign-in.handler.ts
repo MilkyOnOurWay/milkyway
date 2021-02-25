@@ -1,14 +1,15 @@
-import { Inject, NotFoundException } from "@nestjs/common";
-import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
+import { Inject, NotFoundException } from '@nestjs/common';
+import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 
-import { SignInCommand } from "src/user/application/command/sign-in.command";
+import { SignInCommand } from 'src/user/application/command/sign-in.command';
 
-import { UserRepository } from "src/user/domain/repository";
+import { UserRepository } from 'src/user/domain/repository';
 
 @CommandHandler(SignInCommand)
 export class SignInHandler implements ICommandHandler<SignInCommand> {
   constructor(
-    @Inject('UserRepositoryImplement') private readonly userRepository: UserRepository,
+    @Inject('UserRepositoryImplement')
+    private readonly userRepository: UserRepository,
     private readonly eventPublisher: EventPublisher,
   ) {}
   public async execute(command: SignInCommand): Promise<void> {
@@ -20,6 +21,6 @@ export class SignInHandler implements ICommandHandler<SignInCommand> {
 
     await this.userRepository.save(user);
 
-    user.commit()
+    user.commit();
   }
 }

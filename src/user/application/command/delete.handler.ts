@@ -1,14 +1,15 @@
-import { Inject, NotFoundException } from "@nestjs/common";
-import { CommandHandler, EventPublisher, ICommandHandler } from "@nestjs/cqrs";
+import { Inject, NotFoundException } from '@nestjs/common';
+import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 
-import { DeleteCommand } from "src/user/application/command/delete.command";
+import { DeleteCommand } from 'src/user/application/command/delete.command';
 
-import { UserRepository } from "src/user/domain/repository";
+import { UserRepository } from 'src/user/domain/repository';
 
 @CommandHandler(DeleteCommand)
 export class DeleteHandler implements ICommandHandler {
   constructor(
-    @Inject('UserRepositoryImplement') private readonly userRepository: UserRepository,
+    @Inject('UserRepositoryImplement')
+    private readonly userRepository: UserRepository,
     private readonly eventPublisher: EventPublisher,
   ) {}
 

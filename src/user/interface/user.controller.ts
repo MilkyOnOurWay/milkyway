@@ -10,7 +10,6 @@ import { SignInCommand } from 'src/user/application/command/sign-in.command';
 import { SignUpCommand } from 'src/user/application/command/sign-up.command';
 import { UpdateCommand } from 'src/user/application/command/update.command';
 
-
 @Controller('users')
 export class UserController {
   constructor(private readonly commandBus: CommandBus) {}
@@ -26,7 +25,10 @@ export class UserController {
   }
 
   @Put(':id')
-  public async update(@Param('id') id: string, @Body() dto: UpdateUserDto): Promise<void> {
+  public async update(
+    @Param('id') id: string,
+    @Body() dto: UpdateUserDto,
+  ): Promise<void> {
     await this.commandBus.execute(new UpdateCommand(id, dto.name));
   }
 

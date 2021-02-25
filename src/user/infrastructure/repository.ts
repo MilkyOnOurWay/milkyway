@@ -1,11 +1,10 @@
-import { getRepository } from "typeorm";
+import { getRepository } from 'typeorm';
 import { v4 } from 'uuid';
 
-import { User as Entity} from "src/user/infrastructure/entities/user.entity";
+import { User as Entity } from 'src/user/infrastructure/entities/user.entity';
 
-import { UserRepository } from "src/user/domain/repository";
-import { User } from "src/user/domain/user";
-
+import { UserRepository } from 'src/user/domain/repository';
+import { User } from 'src/user/domain/user';
 
 export class UserRepositoryImplement implements UserRepository {
   public async save(user: User): Promise<void> {
@@ -29,7 +28,7 @@ export class UserRepositoryImplement implements UserRepository {
       createdAt: model.getAttributes().createdAt,
       updatedAt: model.getAttributes().updatedAt,
       deletedAt: model.getAttributes().deletedAt,
-    }
+    };
   }
 
   private convertEntityToModel(entity: Entity): User {
@@ -39,6 +38,6 @@ export class UserRepositoryImplement implements UserRepository {
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       deletedAt: entity.deletedAt,
-    })
+    });
   }
 }

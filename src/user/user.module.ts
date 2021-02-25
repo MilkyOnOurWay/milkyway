@@ -18,7 +18,7 @@ const commandHandlers = [
   SignInHandler,
   UpdateHandler,
   DeleteHandler,
-]
+];
 
 @Module({
   imports: [CqrsModule, ConfigModule],

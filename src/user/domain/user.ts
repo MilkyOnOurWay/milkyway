@@ -1,9 +1,9 @@
-import { AggregateRoot } from "@nestjs/cqrs";
+import { AggregateRoot } from '@nestjs/cqrs';
 
-import { UserDeletedEvent } from "src/user/domain/event/user-deleted.event";
-import { UserSignedInEvent } from "src/user/domain/event/user-signed-in.event";
-import { UserSignedUpEvent } from "src/user/domain/event/user-signed-up.event";
-import { UserUpdatedEvent } from "src/user/domain/event/user-updated.event";
+import { UserDeletedEvent } from 'src/user/domain/event/user-deleted.event';
+import { UserSignedInEvent } from 'src/user/domain/event/user-signed-in.event';
+import { UserSignedUpEvent } from 'src/user/domain/event/user-signed-up.event';
+import { UserUpdatedEvent } from 'src/user/domain/event/user-updated.event';
 
 export class User extends AggregateRoot {
   private readonly id: string;
@@ -12,7 +12,7 @@ export class User extends AggregateRoot {
   private updatedAt: Date;
   private deletedAt?: Date;
 
-  constructor(attributes: UserAttributes){
+  constructor(attributes: UserAttributes) {
     super();
     this.id = attributes.id;
     this.name = attributes.name;

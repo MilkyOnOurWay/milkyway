@@ -4,6 +4,6 @@ import { UniverseController } from './universe.controller';
 
 @Module({
   controllers: [UniverseController],
-  providers: [UniverseService]
+  providers: [UniverseService],
 })
 export class UniverseModule {}
