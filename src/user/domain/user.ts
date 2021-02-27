@@ -6,10 +6,10 @@ import { UserSignedUpEvent } from 'src/user/domain/event/user-signed-up.event';
 import { UserUpdatedEvent } from 'src/user/domain/event/user-updated.event';
 
 export class User extends AggregateRoot {
-  private readonly id: string;
-  private name: string;
-  private readonly createdAt: Date;
-  private updatedAt: Date;
+  private readonly id!: string;
+  private name!: string;
+  private readonly createdAt!: Date;
+  private updatedAt!: Date;
   private deletedAt?: Date;
 
   constructor(attributes: UserAttributes) {

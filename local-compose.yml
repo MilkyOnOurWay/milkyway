@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  database:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    environment: 
+      - MYSQL_DATABASE=milkyway
+      - MYSQL_ROOT_PASSWORD=test
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+      - ~/database/milkyway:/var/lib/mysql

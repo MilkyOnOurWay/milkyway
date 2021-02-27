@@ -1,9 +1,46 @@
 import { Module } from '@nestjs/common';
-import { CafeService } from './cafe.service';
-import { CafeController } from './cafe.controller';
+import { CqrsModule } from '@nestjs/cqrs';
+
+import { SuggestionRepositoryImplement } from 'src/cafe/infrastructure/repository/suggestion.repository';
+import { CafeRepositoryImplement } from 'src/cafe/infrastructure/repository/cafe.repository';
+
+import { CafeController } from 'src/cafe/interface/cafe.controller';
+import { SuggestionController } from 'src/cafe/interface/suggestion.controller';
+
+import { AcceptSuggestionHandler } from 'src/cafe/application/command/accept-suggestion.handler';
+import { CancelSuggestionHandler } from 'src/cafe/application/command/cancel-suggestion.handler';
+import { CreateSuggestionHandler } from 'src/cafe/application/command/create-suggestion.handler';
+import { RejectSuggestionHandler } from 'src/cafe/application/command/reject-suggestion.handler';
+import { CafeRegisteredHandler } from 'src/cafe/application/event/cafe-registered.handler';
+import { CafeUnregisteredHandler } from 'src/cafe/application/event/cafe-unregistered.handler';
+import { CafeUpdatedHandler } from 'src/cafe/application/event/cafe-updated.handler';
+import { SuggestionAcceptedHandler } from 'src/cafe/application/event/suggestion-accepted.handler';
+import { SuggestionCanceledHandler } from 'src/cafe/application/event/suggestion-canceled.handler';
+import { SuggestionCreatedHandler } from 'src/cafe/application/event/suggestion-created.handler';
+import { SuggestionRejectedHandler } from 'src/cafe/application/event/suggestion-rejected.handler';
+
+const commandHandlers = [
+  CreateSuggestionHandler,
+  AcceptSuggestionHandler,
+  CancelSuggestionHandler,
+  RejectSuggestionHandler,
+];
+
+const eventHandlers = [
+  SuggestionCreatedHandler,
+  SuggestionAcceptedHandler,
+  SuggestionCanceledHandler,
+  SuggestionRejectedHandler,
+  CafeUpdatedHandler,
+  CafeRegisteredHandler,
+  CafeUnregisteredHandler,
+];
+
+const repositories = [SuggestionRepositoryImplement, CafeRepositoryImplement];
 
 @Module({
-  controllers: [CafeController],
-  providers: [CafeService],
+  imports: [CqrsModule],
+  controllers: [CafeController, SuggestionController],
+  providers: [...commandHandlers, ...eventHandlers, ...repositories],
 })
 export class CafeModule {}
