@@ -19,48 +19,59 @@ import { CafeUnregisteredEvent } from 'src/cafe/domain/event/cafe-unregistered.e
 import { CafeRegisteredEvent } from 'src/cafe/domain/event/cafe-registered.event';
 import { CafeUpdatedEvent } from 'src/cafe/domain/event/cafe-updated.event';
 import { CafeTip, MenuCategory } from 'src/cafe/domain/constant';
+import { ApiProperty } from '@nestjs/swagger';
 
 class OpenHour {
   @IsDateString()
   @ValidateIf((openHour) => !openHour.allDayLong)
+  @ApiProperty()
   public readonly open: Date;
 
   @IsDateString()
   @ValidateIf((openHour) => !openHour.allDayLong)
+  @ApiProperty()
   public readonly close: Date;
 
   @IsBoolean()
   @ValidateIf((openHour) => !openHour.open && !openHour.close)
+  @ApiProperty()
   public readonly allDayLong: boolean;
 }
 
 export class BusinessHours {
   @Type(() => OpenHour)
   @ValidateNested({ each: true })
+  @ApiProperty()
   public readonly mon: OpenHour;
 
   @Type(() => OpenHour)
   @ValidateNested({ each: true })
+  @ApiProperty()
   public readonly tue: OpenHour;
 
   @Type(() => OpenHour)
   @ValidateNested({ each: true })
+  @ApiProperty()
   public readonly wed: OpenHour;
 
   @Type(() => OpenHour)
   @ValidateNested({ each: true })
+  @ApiProperty()
   public readonly thu: OpenHour;
 
   @Type(() => OpenHour)
   @ValidateNested({ each: true })
+  @ApiProperty()
   public readonly fri: OpenHour;
 
   @Type(() => OpenHour)
   @ValidateNested({ each: true })
+  @ApiProperty()
   public readonly sat: OpenHour;
 
   @Type(() => OpenHour)
   @ValidateNested({ each: true })
+  @ApiProperty()
   public readonly sun: OpenHour;
 }
 
@@ -196,11 +207,14 @@ export interface CafeAttributes {
 
 export class Menu {
   @IsString()
+  @ApiProperty()
   public readonly name: string;
 
   @IsInt()
+  @ApiProperty()
   public readonly price: number;
 
   @IsEnum(MenuCategory, { each: true })
+  @ApiProperty({ enum: MenuCategory, isArray: true })
   public readonly categories: MenuCategory[];
 }
