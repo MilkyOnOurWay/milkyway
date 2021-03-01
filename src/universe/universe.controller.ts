@@ -10,7 +10,9 @@ import {
 import { UniverseService } from './universe.service';
 import { CreateUniverseDto } from './dto/create-universe.dto';
 import { UpdateUniverseDto } from './dto/update-universe.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Universes')
 @Controller('universe')
 export class UniverseController {
   constructor(private readonly universeService: UniverseService) {}

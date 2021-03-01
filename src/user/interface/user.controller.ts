@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
+import { ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDto } from 'src/user/interface/dto/create-user.dto';
 import { SignInDto } from 'src/user/interface/dto/sign-in.dto';
@@ -10,6 +11,7 @@ import { SignInCommand } from 'src/user/application/command/sign-in.command';
 import { SignUpCommand } from 'src/user/application/command/sign-up.command';
 import { UpdateCommand } from 'src/user/application/command/update.command';
 
+@ApiTags('Users')
 @Controller('users')
 export class UserController {
   constructor(private readonly commandBus: CommandBus) {}

@@ -34,7 +34,7 @@ export class CreateSuggestionDto {
 
   @Type(() => BusinessHours)
   @ValidateNested({ each: true })
-  @ApiProperty({ type: () => BusinessHours})
+  @ApiProperty({ type: () => BusinessHours })
   public readonly businessHours: BusinessHours;
 
   @IsPhoneNumber()
@@ -61,5 +61,6 @@ export class CreateSuggestionDto {
 
   @IsEnum(CafeTip, { each: true })
   @ApiProperty({ enum: CafeTip, isArray: true })
+  @IsArray()
   public readonly tips: CafeTip[];
 }
